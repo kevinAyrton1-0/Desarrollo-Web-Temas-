@@ -1,0 +1,1744 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Cheat Sheet - SIS 256 Tecnologia y Desarrollo Web - USFX</title>
+<style>
+/* ===== RESET & BASE ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 9pt;
+    line-height: 1.25;
+    color: #1a1a1a;
+    background: #fff;
+}
+
+/* ===== PRINT LAYOUT ===== */
+@media print {
+    body { font-size: 8.5pt; }
+    .page { page-break-after: always; margin: 0; padding: 4mm; }
+    .page:last-child { page-break-after: avoid; }
+    @page { size: A4 landscape; margin: 5mm; }
+    .no-print { display: none; }
+    section { break-inside: avoid-column; }
+}
+
+/* ===== SCREEN LAYOUT ===== */
+@media screen {
+    body { background: #e0e0e0; padding: 10px; }
+    .page {
+        background: #fff;
+        width: 297mm;
+        min-height: 210mm;
+        margin: 10px auto;
+        padding: 6mm;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+}
+
+/* ===== HEADER ===== */
+.page-header {
+    text-align: center;
+    background: linear-gradient(135deg, #1a237e, #283593);
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    font-size: 11pt;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+.page-header small { font-size: 7.5pt; font-weight: normal; opacity: 0.85; }
+
+/* ===== 2-COLUMN GRID ===== */
+.columns {
+    column-count: 2;
+    column-gap: 8px;
+}
+
+/* ===== SECTIONS ===== */
+section {
+    break-inside: avoid-column;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    overflow: hidden;
+}
+
+section h2 {
+    font-size: 8.5pt;
+    padding: 2px 6px;
+    color: #fff;
+    margin: 0;
+    letter-spacing: 0.3px;
+}
+
+section .content {
+    padding: 3px 5px;
+}
+
+/* ===== COLOR THEMES PER SECTION ===== */
+.sec-html h2 { background: #e65100; }
+.sec-html { border-color: #e65100; }
+
+.sec-css h2 { background: #1565c0; }
+.sec-css { border-color: #1565c0; }
+
+.sec-php h2 { background: #4a148c; }
+.sec-php { border-color: #4a148c; }
+
+.sec-strings h2 { background: #00695c; }
+.sec-strings { border-color: #00695c; }
+
+.sec-arrays h2 { background: #2e7d32; }
+.sec-arrays { border-color: #2e7d32; }
+
+.sec-forms h2 { background: #ad1457; }
+.sec-forms { border-color: #ad1457; }
+
+.sec-oop h2 { background: #4e342e; }
+.sec-oop { border-color: #4e342e; }
+
+.sec-sessions h2 { background: #37474f; }
+.sec-sessions { border-color: #37474f; }
+
+.sec-cookies h2 { background: #bf360c; }
+.sec-cookies { border-color: #bf360c; }
+
+.sec-db h2 { background: #0d47a1; }
+.sec-db { border-color: #0d47a1; }
+
+.sec-sql h2 { background: #1b5e20; }
+.sec-sql { border-color: #1b5e20; }
+
+.sec-flex h2 { background: #6a1b9a; }
+.sec-flex { border-color: #6a1b9a; }
+
+.sec-js h2 { background: #f9a825; color: #1a1a1a; }
+.sec-js { border-color: #f9a825; }
+
+.sec-jsdom h2 { background: #e65100; }
+.sec-jsdom { border-color: #e65100; }
+
+.sec-jsevt h2 { background: #2e7d32; }
+.sec-jsevt { border-color: #2e7d32; }
+
+.sec-jses6 h2 { background: #1565c0; }
+.sec-jses6 { border-color: #1565c0; }
+
+.sec-jsasync h2 { background: #4a148c; }
+.sec-jsasync { border-color: #4a148c; }
+
+.sec-fetch h2 { background: #0277bd; }
+.sec-fetch { border-color: #0277bd; }
+
+.sec-ajax h2 { background: #e65100; }
+.sec-ajax { border-color: #e65100; }
+
+.sec-api h2 { background: #2e7d32; }
+.sec-api { border-color: #2e7d32; }
+
+.sec-cors h2 { background: #6a1b9a; }
+.sec-cors { border-color: #6a1b9a; }
+
+.sec-realtime h2 { background: #c62828; }
+.sec-realtime { border-color: #c62828; }
+
+.sec-spa h2 { background: #1565c0; }
+.sec-spa { border-color: #1565c0; }
+
+.sec-viewport h2 { background: #00838f; }
+.sec-viewport { border-color: #00838f; }
+
+.sec-media h2 { background: #6a1b9a; }
+.sec-media { border-color: #6a1b9a; }
+
+.sec-bsgrid h2 { background: #7b1fa2; }
+.sec-bsgrid { border-color: #7b1fa2; }
+
+.sec-bscomp h2 { background: #c62828; }
+.sec-bscomp { border-color: #c62828; }
+
+.sec-bsutil h2 { background: #2e7d32; }
+.sec-bsutil { border-color: #2e7d32; }
+
+.sec-tailwind h2 { background: #0277bd; }
+.sec-tailwind { border-color: #0277bd; }
+
+/* ===== CODE BLOCKS ===== */
+code, pre {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 8pt;
+    background: #f5f5f5;
+    border-radius: 2px;
+}
+code {
+    padding: 0 2px;
+    color: #c62828;
+}
+pre {
+    padding: 3px 5px;
+    margin: 2px 0;
+    border-left: 2px solid #ccc;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+    line-height: 1.2;
+}
+
+/* ===== TABLES ===== */
+table.ref {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 8pt;
+    margin: 2px 0;
+}
+table.ref td, table.ref th {
+    padding: 1px 4px;
+    border-bottom: 1px solid #e0e0e0;
+    vertical-align: top;
+}
+table.ref tr:nth-child(even) { background: #fafafa; }
+table.ref td:first-child {
+    font-family: 'Consolas', monospace;
+    color: #1a237e;
+    white-space: nowrap;
+    font-size: 7.5pt;
+}
+
+/* ===== COMPACT LISTS ===== */
+.compact { margin: 1px 0; }
+.compact li { margin-left: 12px; margin-bottom: 1px; }
+
+/* ===== FLEXBOX DIAGRAM ===== */
+.flex-demo {
+    display: flex;
+    gap: 3px;
+    margin: 2px 0;
+    flex-wrap: wrap;
+}
+.flex-demo .box {
+    border: 1px solid #6a1b9a;
+    background: #f3e5f5;
+    text-align: center;
+    font-size: 6.5pt;
+    border-radius: 2px;
+    padding: 1px 3px;
+    font-family: monospace;
+}
+.flex-container-demo {
+    border: 1px dashed #999;
+    padding: 2px;
+    margin: 1px 0;
+    display: flex;
+    min-height: 18px;
+    border-radius: 2px;
+    background: #fafafa;
+}
+.flex-container-demo .item {
+    background: #7e57c2;
+    color: #fff;
+    font-size: 6pt;
+    padding: 1px 4px;
+    border-radius: 2px;
+    margin: 1px;
+}
+.flex-label {
+    font-size: 7pt;
+    font-weight: bold;
+    color: #4a148c;
+    margin-top: 2px;
+}
+
+/* ===== UTILITY ===== */
+.tag { color: #e65100; font-weight: bold; }
+.attr { color: #1565c0; }
+.val { color: #2e7d32; }
+.kw { color: #4a148c; font-weight: bold; }
+.small { font-size: 7pt; color: #666; }
+.two-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+.separator { border-top: 1px dashed #ccc; margin: 2px 0; }
+b { font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- ==================== PAGINA 1 ==================== -->
+<div class="page">
+<div class="page-header">
+    Referencia Rapida - SIS 256 Tecnologia y Desarrollo Web - USFX
+    <br><small>HTML | CSS | PHP | MySQL | JavaScript | RIA/AJAX/Fetch | Responsive/Bootstrap - Hoja de Consulta para Examen</small>
+</div>
+<div class="columns">
+
+<!-- HTML BASICO -->
+<section class="sec-html">
+<h2>1. HTML BASICO</h2>
+<div class="content">
+<b>Estructura base:</b>
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Titulo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt; ...contenido... &lt;/body&gt;&lt;/html&gt;</pre>
+
+<b>Etiquetas principales:</b>
+<table class="ref">
+<tr><td>&lt;h1&gt;...&lt;h6&gt;</td><td>Encabezados (1=mayor, 6=menor)</td></tr>
+<tr><td>&lt;p&gt;</td><td>Parrafo</td></tr>
+<tr><td>&lt;div&gt; / &lt;span&gt;</td><td>Contenedor bloque / en linea</td></tr>
+<tr><td>&lt;br&gt; / &lt;hr&gt;</td><td>Salto de linea / linea horizontal</td></tr>
+<tr><td>&lt;a href="url"&gt;</td><td>Enlace</td></tr>
+<tr><td>&lt;img src="" alt=""&gt;</td><td>Imagen</td></tr>
+<tr><td>&lt;ul&gt;&lt;li&gt;</td><td>Lista no ordenada</td></tr>
+<tr><td>&lt;ol&gt;&lt;li&gt;</td><td>Lista ordenada</td></tr>
+<tr><td>&lt;table&gt;&lt;tr&gt;&lt;td&gt;</td><td>Tabla / fila / celda</td></tr>
+<tr><td>&lt;th&gt;</td><td>Celda encabezado (negrita)</td></tr>
+</table>
+
+<b>Atributos comunes:</b>
+<code>href</code> <code>src</code> <code>alt</code> <code>class</code> <code>id</code> <code>style</code> <code>colspan</code> <code>rowspan</code> <code>border</code> <code>width</code>
+
+<div class="separator"></div>
+<b>Formularios:</b>
+<pre>&lt;form method="POST" action="pagina.php"&gt;
+  &lt;input type="text" name="campo"&gt;
+  &lt;input type="password" name="pass"&gt;
+  &lt;input type="radio" name="op" value="1"&gt;
+  &lt;input type="checkbox" name="chk"&gt;
+  &lt;input type="hidden" name="id" value="5"&gt;
+  &lt;input type="date" name="fecha"&gt;
+  &lt;select name="sel"&gt;
+    &lt;option value="a"&gt;Opcion A&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;textarea name="txt"&gt;&lt;/textarea&gt;
+  &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+&lt;/form&gt;</pre>
+</div>
+</section>
+
+<!-- CSS ESENCIAL -->
+<section class="sec-css">
+<h2>2. CSS ESENCIAL</h2>
+<div class="content">
+<b>Selectores:</b>
+<code>elemento</code> &nbsp; <code>.clase</code> &nbsp; <code>#id</code> &nbsp; <code>selector:hover</code>
+
+<div class="separator"></div>
+<b>Formas de incluir CSS:</b>
+<table class="ref">
+<tr><td>Inline</td><td><code>&lt;p style="color:red;"&gt;</code></td></tr>
+<tr><td>Embebido</td><td><code>&lt;style&gt; p { color:red; } &lt;/style&gt;</code></td></tr>
+<tr><td>Externo</td><td><code>&lt;link rel="stylesheet" href="estilos.css"&gt;</code></td></tr>
+</table>
+
+<div class="separator"></div>
+<b>Modelo de caja (Box Model):</b>
+<pre>margin | border | padding | contenido
+margin: 10px;          /* todos */
+margin: 10px 20px;     /* vert horiz */
+margin: 5px 10px 15px 20px; /* T R B L */
+padding: 10px;
+border: 1px solid #000;
+width: 200px; height: 100px;</pre>
+
+<b>Texto y colores:</b>
+<table class="ref">
+<tr><td>color: #333;</td><td>Color de texto</td></tr>
+<tr><td>background-color: #fff;</td><td>Fondo</td></tr>
+<tr><td>font-family: Arial;</td><td>Tipografia</td></tr>
+<tr><td>font-size: 16px;</td><td>Tamano letra</td></tr>
+<tr><td>font-weight: bold;</td><td>Grosor (bold|normal)</td></tr>
+<tr><td>text-align: center;</td><td>Alineacion (left|right|center|justify)</td></tr>
+<tr><td>text-decoration: none;</td><td>Decoracion (underline|none)</td></tr>
+</table>
+
+<b>Display:</b> <code>block</code> <code>inline</code> <code>inline-block</code> <code>none</code> <code>flex</code>
+
+<div class="separator"></div>
+<b>Posicionamiento:</b>
+<pre>position: static|relative|absolute|fixed;
+top: 10px; right: 10px; bottom: 10px; left: 10px;</pre>
+
+<b>Centrar elementos:</b>
+<pre>margin: 0 auto;       /* centrar bloque */
+text-align: center;    /* centrar texto/inline */</pre>
+
+<b>Ejemplo de clase:</b>
+<pre>.nombreClase { propiedad: valor; }</pre>
+</div>
+</section>
+
+<!-- PHP BASICO -->
+<section class="sec-php">
+<h2>3. PHP BASICO</h2>
+<div class="content">
+<pre>&lt;?php
+  $var = "valor";      // variable
+  echo "Hola $var";    // imprime: Hola valor
+  echo 'Hola '.$var;   // concatenacion con punto
+?&gt;</pre>
+
+<b>Tipos:</b> <code>int</code> <code>float</code> <code>string</code> <code>bool</code> <code>array</code>
+
+<b>Operadores:</b> <code>+ - * / %</code> (aritmeticos) &nbsp; <code>.</code> (concat)
+<br><code>== != < > <= >= ===</code> (comparacion) &nbsp; <code>&& || !</code> (logicos)
+
+<b>Comentarios:</b> <code>// linea</code> &nbsp; <code># linea</code> &nbsp; <code>/* bloque */</code>
+
+<div class="separator"></div>
+<b>Condicionales:</b>
+<pre>if($cond) { ... }
+elseif($cond2) { ... }
+else { ... }
+
+switch($var) {
+  case "val1": ...; break;
+  case "val2": ...; break;
+  default: ...;
+}</pre>
+
+<b>Ciclos:</b>
+<pre>for($i=0; $i&lt;$n; $i++) { ... }
+while($cond) { ... }
+foreach($arr as $val) { ... }
+foreach($arr as $key =&gt; $val) { ... }</pre>
+</div>
+</section>
+
+<!-- CADENAS PHP -->
+<section class="sec-strings">
+<h2>4. FUNCIONES DE CADENAS PHP</h2>
+<div class="content">
+<table class="ref">
+<tr><td>strlen($s)</td><td>Longitud de cadena</td></tr>
+<tr><td>strtolower($s)</td><td>Convertir a minusculas</td></tr>
+<tr><td>strtoupper($s)</td><td>Convertir a mayusculas</td></tr>
+<tr><td>substr($s, ini, largo)</td><td>Extraer subcadena</td></tr>
+<tr><td>strpos($s, "buscar")</td><td>Posicion de subcadena</td></tr>
+<tr><td>str_replace("v","n",$s)</td><td>Reemplazar texto</td></tr>
+<tr><td>explode(" ", $s)</td><td>Cadena a array</td></tr>
+<tr><td>implode("-", $arr)</td><td>Array a cadena</td></tr>
+<tr><td>trim($s)</td><td>Quitar espacios extremos</td></tr>
+<tr><td>ucwords($s)</td><td>1ra letra mayuscula c/palabra</td></tr>
+<tr><td>strrev($s)</td><td>Invertir cadena</td></tr>
+<tr><td>str_word_count($s)</td><td>Contar palabras</td></tr>
+</table>
+</div>
+</section>
+
+</div><!-- /columns -->
+</div><!-- /page 1 -->
+
+<!-- ==================== PAGINA 2 ==================== -->
+<div class="page">
+<div class="page-header">
+    Referencia Rapida - SIS 256 <small>(Pagina 2)</small>
+</div>
+<div class="columns">
+
+<!-- ARREGLOS PHP -->
+<section class="sec-arrays">
+<h2>5. ARREGLOS PHP</h2>
+<div class="content">
+<pre>// Crear arreglos
+$arr = array(1, 2, 3);
+$arr = [1, 2, 3];
+$arr[] = "nuevo";          // agregar al final
+
+// Arreglo asociativo
+$datos = array("nombre"=&gt;"Juan", "edad"=&gt;20);
+$datos = ["nombre"=&gt;"Juan", "edad"=&gt;20];
+echo $datos["nombre"];     // Juan</pre>
+
+<b>Funciones de arreglos:</b>
+<table class="ref">
+<tr><td>count($arr)</td><td>Cantidad de elementos</td></tr>
+<tr><td>array_push($arr, $v)</td><td>Agregar al final</td></tr>
+<tr><td>array_pop($arr)</td><td>Quitar del final</td></tr>
+<tr><td>array_shift($arr)</td><td>Quitar del inicio</td></tr>
+<tr><td>sort($arr)</td><td>Ordenar ascendente</td></tr>
+<tr><td>rsort($arr)</td><td>Ordenar descendente</td></tr>
+<tr><td>in_array($val, $arr)</td><td>Verificar si existe</td></tr>
+</table>
+
+<b>Recorrer:</b>
+<pre>foreach($arr as $valor) { echo $valor; }
+foreach($arr as $clave =&gt; $valor) {
+    echo "$clave: $valor";
+}</pre>
+</div>
+</section>
+
+<!-- FORMULARIOS PHP -->
+<section class="sec-forms">
+<h2>6. FORMULARIOS PHP</h2>
+<div class="content">
+<b>Metodo GET</b> (datos en URL):
+<pre>&lt;form method="GET" action="pagina.php"&gt;
+  &lt;input type="text" name="buscar"&gt;
+&lt;/form&gt;
+// En pagina.php:
+$buscar = $_GET["buscar"];</pre>
+
+<b>Metodo POST</b> (datos ocultos):
+<pre>&lt;form method="POST" action="pagina.php"&gt;
+  &lt;input type="text" name="usuario"&gt;
+&lt;/form&gt;
+// En pagina.php:
+$usuario = $_POST["usuario"];</pre>
+
+<b>Redirigir:</b>
+<pre>header("Location: pagina.php");
+exit; // siempre despues de header</pre>
+</div>
+</section>
+
+<!-- CLASES PHP -->
+<section class="sec-oop">
+<h2>7. CLASES PHP (POO)</h2>
+<div class="content">
+<pre>class NombreClase {
+    private $propiedad;
+
+    public function __construct($param) {
+        $this-&gt;propiedad = $param;
+    }
+
+    public function getPropiedad() {
+        return $this-&gt;propiedad;
+    }
+
+    public function setPropiedad($val) {
+        $this-&gt;propiedad = $val;
+    }
+}
+// Uso:
+$obj = new NombreClase("valor");
+echo $obj-&gt;getPropiedad();
+$obj-&gt;setPropiedad("nuevo");</pre>
+<b>Visibilidad:</b> <code>public</code> (todos), <code>private</code> (solo la clase), <code>protected</code> (clase e hijos)
+</div>
+</section>
+
+<!-- SESIONES -->
+<section class="sec-sessions">
+<h2>8. SESIONES PHP</h2>
+<div class="content">
+<pre>session_start(); // AL INICIO de cada pagina
+
+// Guardar
+$_SESSION["usuario"] = "Juan";
+$_SESSION["rol"] = "admin";
+
+// Leer
+$nombre = $_SESSION["usuario"];
+
+// Verificar si existe
+if(isset($_SESSION["usuario"])) { ... }
+
+// Borrar una variable
+unset($_SESSION["usuario"]);
+
+// Destruir toda la sesion
+session_destroy();</pre>
+</div>
+</section>
+
+<!-- COOKIES -->
+<section class="sec-cookies">
+<h2>9. COOKIES PHP</h2>
+<div class="content">
+<pre>// Crear cookie (expira en 1 hora)
+setcookie("nombre", $valor, time()+3600);
+
+// Crear cookie (expira en 30 dias)
+setcookie("nombre", $valor, time()+86400*30);
+
+// Leer cookie
+$val = $_COOKIE["nombre"];
+
+// Verificar si existe
+if(isset($_COOKIE["nombre"])) { ... }
+
+// Eliminar cookie (tiempo pasado)
+setcookie("nombre", "", time()-3600);</pre>
+<span class="small">* setcookie() debe ir ANTES de cualquier salida HTML</span>
+</div>
+</section>
+
+<!-- FLEXBOX -->
+<section class="sec-flex">
+<h2>12. REFERENCIA VISUAL FLEXBOX</h2>
+<div class="content">
+<pre>display: flex;
+flex-direction: row | column;
+flex-wrap: wrap | nowrap;
+justify-content: center | space-between |
+    space-around | space-evenly | flex-start | flex-end;
+align-items: center | stretch |
+    flex-start | flex-end;
+flex: 1; /* hijo ocupa espacio disponible */</pre>
+
+<div class="flex-label">flex-direction: row (predeterminado)</div>
+<div class="flex-container-demo" style="justify-content:flex-start;">
+    <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+</div>
+<div class="flex-label">flex-direction: column</div>
+<div class="flex-container-demo" style="flex-direction:column; min-height:40px;">
+    <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+</div>
+
+<div class="flex-label">justify-content:</div>
+<div style="font-size:6.5pt;">
+    <div style="display:flex;align-items:center;margin:1px 0;">
+        <span style="width:75px;font-family:monospace;">flex-start</span>
+        <div class="flex-container-demo" style="flex:1;justify-content:flex-start;">
+            <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+        </div>
+    </div>
+    <div style="display:flex;align-items:center;margin:1px 0;">
+        <span style="width:75px;font-family:monospace;">center</span>
+        <div class="flex-container-demo" style="flex:1;justify-content:center;">
+            <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+        </div>
+    </div>
+    <div style="display:flex;align-items:center;margin:1px 0;">
+        <span style="width:75px;font-family:monospace;">space-between</span>
+        <div class="flex-container-demo" style="flex:1;justify-content:space-between;">
+            <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+        </div>
+    </div>
+    <div style="display:flex;align-items:center;margin:1px 0;">
+        <span style="width:75px;font-family:monospace;">space-around</span>
+        <div class="flex-container-demo" style="flex:1;justify-content:space-around;">
+            <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+        </div>
+    </div>
+    <div style="display:flex;align-items:center;margin:1px 0;">
+        <span style="width:75px;font-family:monospace;">space-evenly</span>
+        <div class="flex-container-demo" style="flex:1;justify-content:space-evenly;">
+            <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+        </div>
+    </div>
+</div>
+
+<div class="flex-label">align-items:</div>
+<div style="font-size:6.5pt;">
+    <div style="display:flex;align-items:center;margin:1px 0;">
+        <span style="width:75px;font-family:monospace;">stretch</span>
+        <div class="flex-container-demo" style="flex:1;align-items:stretch;min-height:24px;">
+            <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+        </div>
+    </div>
+    <div style="display:flex;align-items:center;margin:1px 0;">
+        <span style="width:75px;font-family:monospace;">center</span>
+        <div class="flex-container-demo" style="flex:1;align-items:center;min-height:24px;">
+            <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+        </div>
+    </div>
+    <div style="display:flex;align-items:center;margin:1px 0;">
+        <span style="width:75px;font-family:monospace;">flex-start</span>
+        <div class="flex-container-demo" style="flex:1;align-items:flex-start;min-height:24px;">
+            <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+        </div>
+    </div>
+    <div style="display:flex;align-items:center;margin:1px 0;">
+        <span style="width:75px;font-family:monospace;">flex-end</span>
+        <div class="flex-container-demo" style="flex:1;align-items:flex-end;min-height:24px;">
+            <div class="item">1</div><div class="item">2</div><div class="item">3</div>
+        </div>
+    </div>
+</div>
+
+</div>
+</section>
+
+</div><!-- /columns -->
+</div><!-- /page 2 -->
+
+<!-- ==================== PAGINA 3 ==================== -->
+<div class="page">
+<div class="page-header">
+    Referencia Rapida - SIS 256 <small>(Pagina 3)</small>
+</div>
+<div class="columns">
+
+<!-- BASE DE DATOS -->
+<section class="sec-db">
+<h2>10. BASE DE DATOS MySQL CON PHP</h2>
+<div class="content">
+<b>Conexion (conexion.php):</b>
+<pre>$con = new mysqli("localhost","root","","bd_nombre");
+if($con-&gt;connect_error)
+    die("Error: ".$con-&gt;connect_error);</pre>
+
+<b>SELECT (consultar):</b>
+<pre>$result = mysqli_query($con,
+    "SELECT * FROM tabla");
+while($fila = mysqli_fetch_array($result)) {
+    echo $fila["campo"];
+}</pre>
+
+<b>INSERT (insertar):</b>
+<pre>$sql = "INSERT INTO tabla(campo1, campo2)
+    VALUES('$v1', '$v2')";
+mysqli_query($con, $sql);</pre>
+
+<b>UPDATE (actualizar):</b>
+<pre>$sql = "UPDATE tabla SET campo='$valor'
+    WHERE id='$id'";
+mysqli_query($con, $sql);</pre>
+
+<b>DELETE (eliminar):</b>
+<pre>$sql = "DELETE FROM tabla WHERE id='$id'";
+mysqli_query($con, $sql);</pre>
+
+<div class="separator"></div>
+<b>Prepared Statement (seguro contra inyeccion SQL):</b>
+<pre>$stmt = $con-&gt;prepare(
+    "SELECT * FROM usuarios
+     WHERE correo=? AND password=?");
+$stmt-&gt;bind_param("ss", $correo, sha1($pass));
+$stmt-&gt;execute();
+$result = $stmt-&gt;get_result();
+while($fila = $result-&gt;fetch_assoc()) {
+    echo $fila["nombre"];
+}
+$stmt-&gt;close();</pre>
+<span class="small">bind_param tipos: "s"=string, "i"=int, "d"=double</span>
+
+<div class="separator"></div>
+<b>Verificar resultado:</b>
+<pre>if(mysqli_num_rows($result) &gt; 0) {
+    // hay resultados
+}
+// Filas afectadas en INSERT/UPDATE/DELETE
+mysqli_affected_rows($con);</pre>
+
+<b>Cerrar conexion:</b>
+<pre>mysqli_close($con);</pre>
+</div>
+</section>
+
+<!-- SQL BASICO -->
+<section class="sec-sql">
+<h2>11. SQL BASICO</h2>
+<div class="content">
+<b>Consultas principales:</b>
+<pre>-- Seleccionar
+SELECT campo1, campo2 FROM tabla
+    WHERE condicion
+    ORDER BY campo ASC|DESC;
+
+SELECT * FROM tabla; -- todos los campos
+
+-- Insertar
+INSERT INTO tabla(c1, c2)
+    VALUES('v1', 'v2');
+
+-- Actualizar
+UPDATE tabla SET c1='v1', c2='v2'
+    WHERE condicion;
+
+-- Eliminar
+DELETE FROM tabla WHERE condicion;</pre>
+
+<b>Crear tabla:</b>
+<pre>CREATE TABLE tabla (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(150),
+    edad INT,
+    fecha DATE,
+    activo TINYINT(1) DEFAULT 1
+);</pre>
+
+<b>Condiciones WHERE comunes:</b>
+<table class="ref">
+<tr><td>campo = 'valor'</td><td>Igual a</td></tr>
+<tr><td>campo != 'valor'</td><td>Diferente de</td></tr>
+<tr><td>campo LIKE '%texto%'</td><td>Contiene texto</td></tr>
+<tr><td>campo LIKE 'texto%'</td><td>Empieza con</td></tr>
+<tr><td>campo IN ('a','b')</td><td>Esta en lista</td></tr>
+<tr><td>campo BETWEEN 1 AND 10</td><td>Entre rango</td></tr>
+<tr><td>campo IS NULL</td><td>Es nulo</td></tr>
+<tr><td>cond1 AND cond2</td><td>Ambas verdaderas</td></tr>
+<tr><td>cond1 OR cond2</td><td>Al menos una</td></tr>
+</table>
+
+<b>Tipos de datos comunes:</b>
+<code>INT</code> <code>VARCHAR(n)</code> <code>TEXT</code> <code>DATE</code> <code>FLOAT</code> <code>TINYINT</code> <code>DATETIME</code>
+</div>
+</section>
+
+</div><!-- /columns -->
+</div><!-- /page 3 -->
+
+<!-- ==================== PAGINA 4: JAVASCRIPT ==================== -->
+<div class="page">
+<div class="page-header">
+    Referencia Rapida - SIS 256 <small>(Pagina 4 - JavaScript)</small>
+</div>
+<div class="columns">
+
+<!-- JS BASICO -->
+<section class="sec-js">
+<h2>13. JAVASCRIPT BASICO</h2>
+<div class="content">
+<b>Incluir JS:</b>
+<pre>&lt;script src="app.js" defer&gt;&lt;/script&gt;
+&lt;script type="module" src="app.js"&gt;&lt;/script&gt;</pre>
+
+<b>Variables:</b>
+<pre>const PI = 3.14;   // no reasignable (USAR)
+let edad = 25;     // reasignable (cuando necesite)
+var antiguo = "x"; // NO USAR</pre>
+
+<b>Tipos:</b> <code>string</code> <code>number</code> <code>boolean</code> <code>null</code> <code>undefined</code> <code>object</code> <code>bigint</code> <code>symbol</code>
+<br><code>typeof "hola"</code> → <code>"string"</code> &nbsp; <code>Array.isArray([])</code> → <code>true</code>
+
+<div class="separator"></div>
+<b>Operadores:</b>
+<table class="ref">
+<tr><td>=== / !==</td><td>Igualdad/diferencia estricta (USAR)</td></tr>
+<tr><td>== / !=</td><td>Con coercion (evitar)</td></tr>
+<tr><td>&& || !</td><td>AND, OR, NOT logico</td></tr>
+<tr><td>??</td><td>Nullish coalescing (null/undefined)</td></tr>
+<tr><td>?.</td><td>Optional chaining</td></tr>
+<tr><td>? :</td><td>Ternario: <code>cond ? si : no</code></td></tr>
+<tr><td>...</td><td>Spread / rest operator</td></tr>
+</table>
+
+<div class="separator"></div>
+<b>Condicionales y bucles:</b>
+<pre>if (cond) { } else if (cond2) { } else { }
+
+switch (val) {  // usa ===
+  case "a": ...; break;
+  default: ...;
+}
+
+for (let i = 0; i &lt; n; i++) { }
+while (cond) { }
+do { } while (cond);
+for (const item of array) { }  // valores
+for (const key in objeto) { }  // keys</pre>
+
+<div class="separator"></div>
+<b>Funciones:</b>
+<pre>function nombre(a, b) { return a + b; }
+const fn = (a, b) =&gt; a + b;       // arrow
+const f = (x = 10) =&gt; x * 2;      // default
+const sum = (...nums) =&gt;           // rest
+  nums.reduce((a,b) =&gt; a+b, 0);</pre>
+
+<b>Pop-ups:</b> <code>alert("msg")</code> <code>confirm("?")</code> → bool <code>prompt("?")</code> → string
+<br><b>Convertir:</b> <code>parseInt("42")</code> <code>parseFloat("3.14")</code> <code>Number("100")</code> <code>String(42)</code>
+</div>
+</section>
+
+<!-- JS STRINGS Y ARRAYS -->
+<section class="sec-js">
+<h2>14. JS: STRINGS Y ARRAYS</h2>
+<div class="content">
+<b>Template literals:</b>
+<pre>const msg = `Hola ${nombre}, edad: ${edad}`;
+const html = `
+  &lt;div&gt;${contenido}&lt;/div&gt;
+`;</pre>
+
+<b>Metodos de String:</b>
+<table class="ref">
+<tr><td>.length</td><td>Longitud</td></tr>
+<tr><td>.toUpperCase()</td><td>MAYUSCULAS</td></tr>
+<tr><td>.toLowerCase()</td><td>minusculas</td></tr>
+<tr><td>.trim()</td><td>Quitar espacios</td></tr>
+<tr><td>.includes("x")</td><td>Contiene?</td></tr>
+<tr><td>.indexOf("x")</td><td>Posicion (-1 si no)</td></tr>
+<tr><td>.slice(i, j)</td><td>Subcadena</td></tr>
+<tr><td>.split(",")</td><td>String → Array</td></tr>
+<tr><td>.replace(a, b)</td><td>Reemplazar primero</td></tr>
+<tr><td>.replaceAll(a, b)</td><td>Reemplazar todos</td></tr>
+<tr><td>.startsWith("x")</td><td>Inicia con?</td></tr>
+<tr><td>.padStart(n, "0")</td><td>Rellenar inicio</td></tr>
+</table>
+
+<div class="separator"></div>
+<b>Arrays - Metodos basicos:</b>
+<table class="ref">
+<tr><td>push(x) / pop()</td><td>Agregar/quitar al final</td></tr>
+<tr><td>unshift(x) / shift()</td><td>Agregar/quitar al inicio</td></tr>
+<tr><td>splice(i, n)</td><td>Eliminar/insertar en posicion</td></tr>
+<tr><td>slice(i, j)</td><td>Copiar porcion (no muta)</td></tr>
+<tr><td>includes(x)</td><td>Existe? → bool</td></tr>
+<tr><td>indexOf(x)</td><td>Indice (-1 si no)</td></tr>
+<tr><td>sort(fn) / reverse()</td><td>Ordenar / invertir</td></tr>
+<tr><td>[...arr1, ...arr2]</td><td>Concatenar (spread)</td></tr>
+</table>
+
+<b>Metodos funcionales:</b>
+<pre>arr.forEach(x =&gt; { });          // recorrer
+arr.map(x =&gt; x * 2);            // transformar
+arr.filter(x =&gt; x &gt; 0);         // filtrar
+arr.reduce((acc,x) =&gt; acc+x, 0); // acumular
+arr.find(x =&gt; x &gt; 3);           // primer match
+arr.some(x =&gt; x &gt; 0);           // alguno?
+arr.every(x =&gt; x &gt; 0);          // todos?</pre>
+</div>
+</section>
+
+</div><!-- /columns -->
+</div><!-- /page 4 -->
+
+<!-- ==================== PAGINA 5: JS DOM & MODERNO ==================== -->
+<div class="page">
+<div class="page-header">
+    Referencia Rapida - SIS 256 <small>(Pagina 5 - JavaScript DOM &amp; ES6+)</small>
+</div>
+<div class="columns">
+
+<!-- DOM -->
+<section class="sec-jsdom">
+<h2>15. DOM: SELECTORES Y MANIPULACION</h2>
+<div class="content">
+<b>Selectores:</b>
+<pre>document.querySelector("#id")      // 1 elem
+document.querySelector(".clase")
+document.querySelectorAll(".items") // NodeList
+document.getElementById("id")
+document.getElementsByClassName("c")</pre>
+
+<b>Contenido:</b>
+<pre>el.textContent = "texto";  // seguro (sin HTML)
+el.innerHTML = "&lt;b&gt;html&lt;/b&gt;"; // interpreta HTML</pre>
+
+<b>Atributos:</b>
+<pre>el.setAttribute("class", "activo");
+el.getAttribute("href");
+el.removeAttribute("disabled");
+el.dataset.userId;  // data-user-id</pre>
+
+<b>Clases CSS</b> (recomendado para estilos):
+<pre>el.classList.add("activo");
+el.classList.remove("oculto");
+el.classList.toggle("visible");
+el.classList.contains("activo"); // bool</pre>
+
+<b>Estilos inline:</b>
+<pre>el.style.color = "red";
+el.style.fontSize = "20px";</pre>
+
+<div class="separator"></div>
+<b>Crear / Eliminar:</b>
+<pre>const li = document.createElement("li");
+li.textContent = "Nuevo";
+lista.appendChild(li);    // agregar al final
+lista.prepend(li);        // agregar al inicio
+li.remove();              // eliminar</pre>
+
+<b>Navegacion:</b> <code>parentNode</code> <code>children</code> <code>firstElementChild</code> <code>lastElementChild</code> <code>nextElementSibling</code>
+</div>
+</section>
+
+<!-- EVENTOS -->
+<section class="sec-jsevt">
+<h2>16. EVENTOS Y FORMULARIOS JS</h2>
+<div class="content">
+<b>addEventListener</b> (siempre usar):
+<pre>btn.addEventListener("click", (e) =&gt; {
+  e.target;           // elem que origino
+  e.preventDefault(); // cancelar default
+  e.stopPropagation();// detener bubbling
+});</pre>
+
+<b>Eventos comunes:</b>
+<table class="ref">
+<tr><td>click / dblclick</td><td>Click / doble click</td></tr>
+<tr><td>mouseenter / mouseleave</td><td>Mouse entra / sale</td></tr>
+<tr><td>keydown / keyup</td><td>Tecla presionada / suelta</td></tr>
+<tr><td>submit</td><td>Envio de formulario</td></tr>
+<tr><td>input / change</td><td>Valor cambia / pierde foco</td></tr>
+<tr><td>focus / blur</td><td>Enfoca / pierde foco</td></tr>
+<tr><td>DOMContentLoaded</td><td>HTML listo (en document)</td></tr>
+<tr><td>load / scroll / resize</td><td>Carga / scroll / redimensiona</td></tr>
+</table>
+
+<b>Event Delegation:</b>
+<pre>lista.addEventListener("click", (e) =&gt; {
+  if (e.target.matches("li.item"))
+    console.log(e.target.textContent);
+}); // funciona con elementos dinamicos!</pre>
+
+<div class="separator"></div>
+<b>Formularios:</b>
+<pre>form.addEventListener("submit", (e) =&gt; {
+  e.preventDefault();
+  const nombre = document.querySelector(
+    "#nombre").value.trim();
+  const email = document.querySelector(
+    "#email").value.trim();
+  // Radio checked
+  const gen = document.querySelector(
+    'input[name="gen"]:checked')?.value;
+  // FormData
+  const data = new FormData(form);
+  const obj = Object.fromEntries(data);
+});</pre>
+<b>Validacion HTML5:</b> <code>required</code> <code>type="email"</code> <code>minlength</code> <code>pattern</code> <code>min</code> <code>max</code>
+<br><b>Regex:</b> <code>/^[\w.-]+@[\w.-]+\.\w{2,}$/.test(email)</code>
+</div>
+</section>
+
+<!-- ES6+ -->
+<section class="sec-jses6">
+<h2>17. ES6+: CLASES, MODULOS, DESTRUCTURING</h2>
+<div class="content">
+<b>Clases:</b>
+<pre>class Persona {
+  constructor(nombre, edad) {
+    this.nombre = nombre;
+    this.edad = edad;
+  }
+  saludar() {
+    return `Hola, soy ${this.nombre}`;
+  }
+  static crear(n) { return new Persona(n,0); }
+}
+class Est extends Persona {
+  constructor(n, e, carrera) {
+    super(n, e);
+    this.carrera = carrera;
+  }
+}
+const e = new Est("Ana", 20, "Sistemas");</pre>
+
+<b>Modulos:</b>
+<pre>// utils.js
+export const PI = 3.14;
+export function sum(a,b) { return a+b; }
+export default class Calc { }
+
+// app.js
+import Calc from "./utils.js";
+import { PI, sum } from "./utils.js";
+// HTML: &lt;script type="module" src="app.js"&gt;</pre>
+
+<b>Destructuring:</b>
+<pre>const { nombre, edad } = persona;
+const [a, b, ...resto] = [1, 2, 3, 4];
+let x=1, y=2; [x,y] = [y,x]; // swap</pre>
+
+<b>Spread:</b>
+<pre>const arr2 = [...arr1, 4, 5];
+const obj2 = { ...obj1, nuevo: true };</pre>
+</div>
+</section>
+
+<!-- ASYNC -->
+<section class="sec-jsasync">
+<h2>18. PROMESAS, ASYNC/AWAIT, FETCH, JSON</h2>
+<div class="content">
+<b>JSON:</b>
+<pre>JSON.stringify(obj)  // objeto → string
+JSON.parse(jsonStr)  // string → objeto</pre>
+
+<b>localStorage / sessionStorage:</b>
+<pre>localStorage.setItem("key", JSON.stringify(v));
+const v = JSON.parse(localStorage.getItem("key"));
+localStorage.removeItem("key");
+localStorage.clear();</pre>
+
+<div class="separator"></div>
+<b>async/await + Fetch</b> (reemplaza XMLHttpRequest):
+<pre>async function getData() {
+  try {
+    const resp = await fetch("/api/users");
+    if (!resp.ok)
+      throw new Error(`HTTP ${resp.status}`);
+    const data = await resp.json();
+    console.log(data);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+// POST
+const r = await fetch("/api/users", {
+  method: "POST",
+  headers: {"Content-Type":"application/json"},
+  body: JSON.stringify({nombre:"Ana"})
+});
+
+// Paralelo
+const [a, b] = await Promise.all([
+  fetch("/api/a").then(r =&gt; r.json()),
+  fetch("/api/b").then(r =&gt; r.json()),
+]);</pre>
+
+<b>Response:</b> <code>.json()</code> <code>.text()</code> <code>.blob()</code> <code>.ok</code> <code>.status</code>
+
+<div class="separator"></div>
+<b>Promesas:</b>
+<pre>const p = new Promise((resolve, reject) =&gt; {
+  if (ok) resolve(data);
+  else reject("error");
+});
+p.then(d =&gt; {}).catch(e =&gt; {}).finally(()=&gt;{});</pre>
+</div>
+</section>
+
+</div><!-- /columns -->
+</div><!-- /page 5 -->
+
+<!-- ==================== PAGINA 6: RIA / AJAX / FETCH ==================== -->
+<div class="page">
+<div class="page-header">
+    Referencia Rapida - SIS 256 — Pagina 6: RIA, AJAX y Fetch API
+    <br><small>Aplicaciones de Internet Enriquecidas | Comunicacion Asincrona | API REST</small>
+</div>
+<div class="columns">
+
+<!-- FETCH API -->
+<section class="sec-fetch">
+<h2>19. FETCH API — GET, POST, PUT, DELETE</h2>
+<div class="content">
+<b>GET (obtener datos):</b>
+<pre>const resp = await fetch("/api/items");
+if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+const data = await resp.json();</pre>
+
+<b>POST (crear):</b>
+<pre>await fetch("/api/items", {
+  method: "POST",
+  headers: {"Content-Type":"application/json"},
+  body: JSON.stringify({ nombre: "Nuevo" })
+});</pre>
+
+<b>PUT (actualizar):</b>
+<pre>await fetch(`/api/items/${id}`, {
+  method: "PUT",
+  headers: {"Content-Type":"application/json"},
+  body: JSON.stringify({ nombre: "Editado" })
+});</pre>
+
+<b>DELETE (eliminar):</b>
+<pre>await fetch(`/api/items/${id}`, {
+  method: "DELETE"
+});</pre>
+
+<div class="separator"></div>
+<b>Tipos de respuesta:</b>
+<table class="ref">
+<tr><td>resp.json()</td><td>Parsea JSON → objeto JS</td></tr>
+<tr><td>resp.text()</td><td>Texto plano / HTML</td></tr>
+<tr><td>resp.blob()</td><td>Archivo binario (imagen, PDF)</td></tr>
+<tr><td>resp.ok</td><td>true si status 200-299</td></tr>
+<tr><td>resp.status</td><td>Codigo HTTP (200, 404, 500...)</td></tr>
+<tr><td>resp.headers</td><td>Cabeceras de respuesta</td></tr>
+</table>
+
+<b>FormData (archivos):</b>
+<pre>const fd = new FormData();
+fd.append("archivo", inputFile.files[0]);
+fd.append("nombre", "foto.jpg");
+await fetch("/api/upload", {
+  method: "POST",
+  body: fd  // NO poner Content-Type
+});</pre>
+
+<b>AbortController (cancelar):</b>
+<pre>const ctrl = new AbortController();
+fetch(url, { signal: ctrl.signal });
+ctrl.abort(); // cancela la peticion</pre>
+</div>
+</section>
+
+<!-- AJAX PATRONES -->
+<section class="sec-ajax">
+<h2>20. AJAX — PATRONES Y UX</h2>
+<div class="content">
+<b>Patron CRUD completo:</b>
+<pre>async function cargar() {
+  const r = await fetch("/api/items");
+  const items = await r.json();
+  lista.innerHTML = items.map(i =&gt;
+    `&lt;li&gt;${i.nombre}
+     &lt;button onclick="eliminar(${i.id})"&gt;
+       X&lt;/button&gt;&lt;/li&gt;`
+  ).join("");
+}
+
+async function crear(nombre) {
+  await fetch("/api/items", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({ nombre })
+  });
+  cargar(); // recargar lista
+}
+
+async function eliminar(id) {
+  await fetch(`/api/items/${id}`,
+    { method: "DELETE" });
+  cargar();
+}</pre>
+
+<div class="separator"></div>
+<b>UX — Loading / Error:</b>
+<pre>btn.disabled = true;
+spinner.style.display = "block";
+try {
+  const data = await fetch(url)
+    .then(r =&gt; r.json());
+  renderizar(data);
+} catch (e) {
+  msg.textContent = "Error: " + e.message;
+} finally {
+  btn.disabled = false;
+  spinner.style.display = "none";
+}</pre>
+
+<b>Debounce (busqueda en vivo):</b>
+<pre>let timer;
+input.addEventListener("input", () =&gt; {
+  clearTimeout(timer);
+  timer = setTimeout(() =&gt; {
+    buscar(input.value);
+  }, 300);
+});</pre>
+
+<b>Promise.all (paralelo):</b>
+<pre>const [users, posts] = await Promise.all([
+  fetch("/api/users").then(r =&gt; r.json()),
+  fetch("/api/posts").then(r =&gt; r.json()),
+]);</pre>
+</div>
+</section>
+
+<!-- PHP API REST -->
+<section class="sec-api">
+<h2>21. PHP COMO API REST</h2>
+<div class="content">
+<b>Estructura basica api.php:</b>
+<pre>header("Content-Type: application/json");
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods:
+  GET,POST,PUT,DELETE");
+header("Access-Control-Allow-Headers:
+  Content-Type");
+
+$method = $_SERVER["REQUEST_METHOD"];
+$input = json_decode(
+  file_get_contents("php://input"), true);
+
+switch ($method) {
+  case "GET":
+    $rows = $pdo-&gt;query("SELECT * FROM items")
+      -&gt;fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($rows);
+    break;
+
+  case "POST":
+    $stmt = $pdo-&gt;prepare(
+      "INSERT INTO items(nombre) VALUES(?)");
+    $stmt-&gt;execute([$input["nombre"]]);
+    echo json_encode([
+      "id" =&gt; $pdo-&gt;lastInsertId()]);
+    break;
+
+  case "PUT":
+    $stmt = $pdo-&gt;prepare(
+      "UPDATE items SET nombre=? WHERE id=?");
+    $stmt-&gt;execute([
+      $input["nombre"], $input["id"]]);
+    echo json_encode(["ok" =&gt; true]);
+    break;
+
+  case "DELETE":
+    $stmt = $pdo-&gt;prepare(
+      "DELETE FROM items WHERE id=?");
+    $stmt-&gt;execute([$input["id"]]);
+    echo json_encode(["ok" =&gt; true]);
+    break;
+}</pre>
+
+<b>Conexion PDO:</b>
+<pre>$pdo = new PDO(
+  "mysql:host=localhost;dbname=test",
+  "root", "",
+  [PDO::ATTR_ERRMODE =&gt;
+    PDO::ERRMODE_EXCEPTION]);
+</pre>
+</div>
+</section>
+
+<!-- CORS -->
+<section class="sec-cors">
+<h2>22. CORS — CROSS-ORIGIN</h2>
+<div class="content">
+<b>Que es CORS:</b> Mecanismo de seguridad del navegador que bloquea peticiones a dominios diferentes al origen.
+
+<b>Headers PHP necesarios:</b>
+<table class="ref">
+<tr><td>Access-Control-Allow-Origin</td><td><code>*</code> o dominio especifico</td></tr>
+<tr><td>Access-Control-Allow-Methods</td><td>GET, POST, PUT, DELETE</td></tr>
+<tr><td>Access-Control-Allow-Headers</td><td>Content-Type, Authorization</td></tr>
+</table>
+
+<b>Preflight (OPTIONS):</b>
+<pre>if ($_SERVER["REQUEST_METHOD"]==="OPTIONS"){
+  http_response_code(204);
+  exit; // responder vacio al preflight
+}</pre>
+
+<b>Mismo origen = OK:</b>
+<code>localhost:8080</code> → <code>localhost:8080/api</code> ✓
+<br><b>Diferente origen = CORS:</b>
+<code>localhost:3000</code> → <code>localhost:8080/api</code> ✗ (sin headers)
+
+<div class="separator"></div>
+<b>XMLHttpRequest (legado, NO usar):</b>
+<pre>const xhr = new XMLHttpRequest();
+xhr.open("GET", "/api/data");
+xhr.onload = function() {
+  const data = JSON.parse(xhr.responseText);
+};
+xhr.onerror = function() { /*error*/ };
+xhr.send();
+// Fetch es MEJOR: basado en Promesas,
+// mas limpio, soporta async/await</pre>
+</div>
+</section>
+
+<!-- WEBSOCKETS & SSE -->
+<section class="sec-realtime">
+<h2>23. WEBSOCKETS Y SSE (TIEMPO REAL)</h2>
+<div class="content">
+<b>WebSocket (bidireccional):</b>
+<pre>const ws = new WebSocket("ws://localhost:8081");
+ws.onopen = () =&gt; ws.send("Hola");
+ws.onmessage = (e) =&gt; {
+  console.log("Recibido:", e.data);
+};
+ws.onclose = () =&gt; console.log("Cerrado");
+ws.onerror = (e) =&gt; console.error(e);</pre>
+
+<b>SSE — Server-Sent Events (servidor→cliente):</b>
+<pre>// JavaScript (cliente)
+const es = new EventSource("/api/stream.php");
+es.onmessage = (e) =&gt; {
+  const data = JSON.parse(e.data);
+  actualizarUI(data);
+};
+es.onerror = () =&gt; es.close();</pre>
+
+<pre>// PHP (servidor) stream.php
+header("Content-Type: text/event-stream");
+header("Cache-Control: no-cache");
+while (true) {
+  echo "data: " . json_encode($datos) . "\n\n";
+  ob_flush(); flush();
+  sleep(2);
+}</pre>
+
+<b>Comparacion:</b>
+<table class="ref">
+<tr><td></td><td><b>WebSocket</b></td><td><b>SSE</b></td></tr>
+<tr><td>Direccion</td><td>Bidireccional</td><td>Solo servidor→cliente</td></tr>
+<tr><td>Protocolo</td><td>ws:// / wss://</td><td>HTTP normal</td></tr>
+<tr><td>Reconexion</td><td>Manual</td><td>Automatica</td></tr>
+<tr><td>Uso tipico</td><td>Chat, juegos</td><td>Notificaciones, feeds</td></tr>
+</table>
+</div>
+</section>
+
+<!-- SPA / PWA / HTMX -->
+<section class="sec-spa">
+<h2>24. SPA, PWA Y HTMX</h2>
+<div class="content">
+<b>SPA (Single Page Application):</b>
+<ul class="compact">
+<li>Una sola pagina HTML, JS controla la navegacion</li>
+<li>Frameworks: <b>React</b>, <b>Vue</b>, <b>Angular</b>, <b>Svelte</b></li>
+<li>Router del lado cliente (no recarga pagina)</li>
+<li>Ventaja: UX fluida; Desventaja: SEO complejo</li>
+</ul>
+
+<b>PWA (Progressive Web App):</b>
+<ul class="compact">
+<li>Web que se instala como app nativa</li>
+<li>Requiere: <code>manifest.json</code> + <code>Service Worker</code> + HTTPS</li>
+<li>Funciona offline con cache de Service Worker</li>
+</ul>
+
+<pre>// manifest.json (minimo)
+{ "name": "Mi App",
+  "short_name": "App",
+  "start_url": "/",
+  "display": "standalone",
+  "icons": [{"src":"/icon.png",
+    "sizes":"192x192","type":"image/png"}]
+}
+
+// Registrar Service Worker
+navigator.serviceWorker.register("/sw.js");</pre>
+
+<div class="separator"></div>
+<b>HTMX (AJAX sin JS):</b>
+<pre>&lt;!-- GET al hacer click --&gt;
+&lt;button hx-get="/api/items"
+  hx-target="#lista"&gt;Cargar&lt;/button&gt;
+
+&lt;!-- POST desde formulario --&gt;
+&lt;form hx-post="/api/items"
+  hx-target="#lista"
+  hx-swap="beforeend"&gt;
+  &lt;input name="nombre"&gt;
+  &lt;button&gt;Agregar&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;!-- DELETE con confirmacion --&gt;
+&lt;button hx-delete="/api/items/5"
+  hx-confirm="Seguro?"
+  hx-target="closest li"
+  hx-swap="outerHTML"&gt;X&lt;/button&gt;</pre>
+
+<b>Atributos HTMX principales:</b>
+<table class="ref">
+<tr><td>hx-get / hx-post</td><td>Peticion GET / POST a URL</td></tr>
+<tr><td>hx-put / hx-delete</td><td>Peticion PUT / DELETE</td></tr>
+<tr><td>hx-target</td><td>Donde insertar respuesta</td></tr>
+<tr><td>hx-swap</td><td>innerHTML, outerHTML, beforeend...</td></tr>
+<tr><td>hx-trigger</td><td>Evento que dispara (click, submit...)</td></tr>
+<tr><td>hx-confirm</td><td>Dialogo de confirmacion</td></tr>
+</table>
+</div>
+</section>
+
+</div><!-- /columns -->
+</div><!-- /page 6 -->
+
+<!-- ==================== PAGINA 7: DISEÑO RESPONSIVO / BOOTSTRAP ==================== -->
+<div class="page">
+<div class="page-header">
+    Referencia Rapida - SIS 256 — Pagina 7: Diseno Responsivo y Bootstrap 5
+    <br><small>Viewport | Media Queries | Mobile-First | Bootstrap Grid | Componentes | Tailwind CSS</small>
+</div>
+<div class="columns">
+
+<!-- VIEWPORT Y META TAG -->
+<section class="sec-viewport">
+<h2>25. VIEWPORT Y META TAG</h2>
+<div class="content">
+<b>Meta viewport (obligatorio):</b>
+<pre>&lt;meta name="viewport"
+  content="width=device-width,
+  initial-scale=1.0"&gt;</pre>
+<table class="ref">
+<tr><td>width=device-width</td><td>Ancho = ancho del dispositivo</td></tr>
+<tr><td>initial-scale=1.0</td><td>Zoom inicial al 100%</td></tr>
+<tr><td>maximum-scale=1</td><td>Evita zoom del usuario</td></tr>
+<tr><td>user-scalable=no</td><td>Deshabilita zoom (no recomendado)</td></tr>
+</table>
+
+<b>Unidades responsivas:</b>
+<table class="ref">
+<tr><td>%</td><td>Relativo al contenedor padre</td></tr>
+<tr><td>vw / vh</td><td>1% del ancho / alto del viewport</td></tr>
+<tr><td>rem</td><td>Relativo al font-size de <code>&lt;html&gt;</code></td></tr>
+<tr><td>em</td><td>Relativo al font-size del padre</td></tr>
+<tr><td>clamp()</td><td><code>clamp(1rem, 2.5vw, 2rem)</code> min/ideal/max</td></tr>
+<tr><td>min() / max()</td><td><code>width: min(100%, 600px)</code></td></tr>
+</table>
+</div>
+</section>
+
+<!-- MEDIA QUERIES -->
+<section class="sec-media">
+<h2>26. MEDIA QUERIES</h2>
+<div class="content">
+<b>Sintaxis basica:</b>
+<pre>/* Mobile-First (min-width) */
+@media (min-width: 768px) {
+  .container { max-width: 720px; }
+}
+
+/* Desktop-First (max-width) */
+@media (max-width: 767px) {
+  .nav { display: none; }
+}
+
+/* Combinar condiciones */
+@media (min-width: 768px) and
+       (max-width: 1199px) {
+  /* Solo tablets */
+}
+
+/* Orientacion y preferencias */
+@media (orientation: landscape) { }
+@media (prefers-color-scheme: dark) {
+  body { background: #1a1a1a; color:#fff; }
+}</pre>
+
+<b>Breakpoints comunes:</b>
+<table class="ref">
+<tr><td>320-480px</td><td>Moviles pequenos</td></tr>
+<tr><td>481-768px</td><td>Moviles grandes / tablets</td></tr>
+<tr><td>769-1024px</td><td>Tablets / laptops</td></tr>
+<tr><td>1025-1200px</td><td>Escritorio</td></tr>
+<tr><td>1201px+</td><td>Pantallas grandes</td></tr>
+</table>
+</div>
+</section>
+
+<!-- BOOTSTRAP 5 GRID -->
+<section class="sec-bsgrid">
+<h2>27. BOOTSTRAP 5 — GRID SYSTEM</h2>
+<div class="content">
+<b>Setup CDN:</b>
+<pre>&lt;link href="https://cdn.jsdelivr.net
+/npm/bootstrap@5.3.0/dist/css/
+bootstrap.min.css" rel="stylesheet"&gt;
+&lt;script src="https://cdn.jsdelivr.net
+/npm/bootstrap@5.3.0/dist/js/
+bootstrap.bundle.min.js"&gt;&lt;/script&gt;</pre>
+
+<b>Estructura basica (12 columnas):</b>
+<pre>&lt;div class="container"&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-md-6"&gt;Mitad&lt;/div&gt;
+    &lt;div class="col-md-6"&gt;Mitad&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+
+<b>Breakpoints Bootstrap:</b>
+<table class="ref">
+<tr><td>col-</td><td>&lt;576px (Extra small)</td></tr>
+<tr><td>col-sm-</td><td>≥576px (Small)</td></tr>
+<tr><td>col-md-</td><td>≥768px (Medium)</td></tr>
+<tr><td>col-lg-</td><td>≥992px (Large)</td></tr>
+<tr><td>col-xl-</td><td>≥1200px (Extra large)</td></tr>
+<tr><td>col-xxl-</td><td>≥1400px (XXL)</td></tr>
+</table>
+
+<b>Columnas responsivas:</b>
+<pre>&lt;!-- 1 col movil, 2 tablet, 3 desktop --&gt;
+&lt;div class="col-12 col-md-6 col-lg-4"&gt;
+  Contenido adaptable
+&lt;/div&gt;
+
+&lt;!-- Auto-ancho --&gt;
+&lt;div class="col-auto"&gt;Ajusta al contenido&lt;/div&gt;
+
+&lt;!-- Offset --&gt;
+&lt;div class="col-md-6 offset-md-3"&gt;
+  Centrado
+&lt;/div&gt;</pre>
+
+<b>Containers:</b>
+<table class="ref">
+<tr><td>.container</td><td>Ancho fijo responsivo</td></tr>
+<tr><td>.container-fluid</td><td>100% ancho siempre</td></tr>
+<tr><td>.container-md</td><td>100% hasta md, luego fijo</td></tr>
+</table>
+</div>
+</section>
+
+<!-- BOOTSTRAP COMPONENTES -->
+<section class="sec-bscomp">
+<h2>28. BOOTSTRAP 5 — COMPONENTES</h2>
+<div class="content">
+<b>Navbar responsiva:</b>
+<pre>&lt;nav class="navbar navbar-expand-lg
+  navbar-dark bg-dark"&gt;
+  &lt;div class="container"&gt;
+    &lt;a class="navbar-brand"&gt;Logo&lt;/a&gt;
+    &lt;button class="navbar-toggler"
+      data-bs-toggle="collapse"
+      data-bs-target="#nav"&gt;
+      &lt;span class="navbar-toggler-icon"&gt;
+      &lt;/span&gt;
+    &lt;/button&gt;
+    &lt;div class="collapse navbar-collapse"
+      id="nav"&gt;
+      &lt;ul class="navbar-nav ms-auto"&gt;
+        &lt;li class="nav-item"&gt;
+          &lt;a class="nav-link"&gt;Inicio&lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;</pre>
+
+<b>Cards:</b>
+<pre>&lt;div class="card" style="width:18rem"&gt;
+  &lt;img src="img.jpg"
+    class="card-img-top"&gt;
+  &lt;div class="card-body"&gt;
+    &lt;h5 class="card-title"&gt;Titulo&lt;/h5&gt;
+    &lt;p class="card-text"&gt;Texto&lt;/p&gt;
+    &lt;a class="btn btn-primary"&gt;Ver&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+
+<b>Modal:</b>
+<pre>&lt;button data-bs-toggle="modal"
+  data-bs-target="#miModal"&gt;Abrir&lt;/button&gt;
+&lt;div class="modal fade" id="miModal"&gt;
+  &lt;div class="modal-dialog"&gt;
+    &lt;div class="modal-content"&gt;
+      &lt;div class="modal-header"&gt;
+        &lt;h5&gt;Titulo&lt;/h5&gt;
+        &lt;button class="btn-close"
+          data-bs-dismiss="modal"&gt;&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;div class="modal-body"&gt;...&lt;/div&gt;
+      &lt;div class="modal-footer"&gt;
+        &lt;button class="btn btn-secondary"
+          data-bs-dismiss="modal"&gt;Cerrar
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+
+<b>Alertas y botones:</b>
+<pre>&lt;div class="alert alert-success
+  alert-dismissible fade show"&gt;
+  Exito! &lt;button class="btn-close"
+  data-bs-dismiss="alert"&gt;&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;button class="btn btn-primary"&gt;Azul&lt;/button&gt;
+&lt;button class="btn btn-outline-danger"&gt;
+  Rojo outline&lt;/button&gt;
+&lt;button class="btn btn-sm btn-success"&gt;
+  Pequeno&lt;/button&gt;</pre>
+</div>
+</section>
+
+<!-- BOOTSTRAP UTILIDADES -->
+<section class="sec-bsutil">
+<h2>29. BOOTSTRAP 5 — UTILIDADES</h2>
+<div class="content">
+<b>Spacing (m=margin, p=padding):</b>
+<table class="ref">
+<tr><td>m-3 / p-3</td><td>Margin / padding todos lados (1rem)</td></tr>
+<tr><td>mt-2 / mb-4</td><td>Top / bottom (t,b,s,e = top,bottom,start,end)</td></tr>
+<tr><td>mx-auto</td><td>Centrar horizontalmente</td></tr>
+<tr><td>py-5</td><td>Padding vertical grande (3rem)</td></tr>
+<tr><td>gap-3</td><td>Gap en flex/grid (1rem)</td></tr>
+</table>
+<small>Escala: 0=0, 1=0.25rem, 2=0.5rem, 3=1rem, 4=1.5rem, 5=3rem</small>
+
+<b>Display responsivo:</b>
+<table class="ref">
+<tr><td>d-none</td><td>Ocultar siempre</td></tr>
+<tr><td>d-md-block</td><td>Mostrar desde md</td></tr>
+<tr><td>d-lg-none</td><td>Ocultar desde lg</td></tr>
+<tr><td>d-flex</td><td>Display flex</td></tr>
+<tr><td>d-md-flex</td><td>Flex desde md</td></tr>
+</table>
+
+<b>Colores Bootstrap:</b>
+<table class="ref">
+<tr><td>primary</td><td>#0d6efd (azul)</td></tr>
+<tr><td>success</td><td>#198754 (verde)</td></tr>
+<tr><td>danger</td><td>#dc3545 (rojo)</td></tr>
+<tr><td>warning</td><td>#ffc107 (amarillo)</td></tr>
+<tr><td>info</td><td>#0dcaf0 (celeste)</td></tr>
+<tr><td>dark / light</td><td>Oscuro / claro</td></tr>
+</table>
+<small>Uso: <code>text-primary</code>, <code>bg-success</code>, <code>btn-danger</code>, <code>border-warning</code></small>
+
+<b>Texto y tablas:</b>
+<pre>&lt;p class="text-center fw-bold
+  fs-4 text-muted"&gt;Texto&lt;/p&gt;
+
+&lt;table class="table table-striped
+  table-hover table-responsive"&gt;
+  &lt;thead class="table-dark"&gt;...
+&lt;/table&gt;
+
+&lt;!-- Formularios --&gt;
+&lt;div class="mb-3"&gt;
+  &lt;label class="form-label"&gt;Email&lt;/label&gt;
+  &lt;input type="email"
+    class="form-control"&gt;
+&lt;/div&gt;</pre>
+</div>
+</section>
+
+<!-- TAILWIND CSS Y RESPONSIVE PURO -->
+<section class="sec-tailwind">
+<h2>30. TAILWIND CSS Y CSS RESPONSIVO PURO</h2>
+<div class="content">
+<b>Tailwind — prefijos responsivos:</b>
+<pre>&lt;div class="w-full md:w-1/2 lg:w-1/3
+  p-4 bg-blue-500 md:bg-green-500"&gt;
+  Responsivo con utilidades
+&lt;/div&gt;
+
+&lt;nav class="flex flex-col md:flex-row
+  gap-4 p-4"&gt;
+  &lt;a class="hover:text-blue-600"&gt;Link&lt;/a&gt;
+&lt;/nav&gt;
+
+&lt;p class="text-sm md:text-base
+  lg:text-lg dark:text-white"&gt;
+  Texto adaptable
+&lt;/p&gt;</pre>
+
+<b>Breakpoints Tailwind:</b>
+<table class="ref">
+<tr><td>sm:</td><td>≥640px</td></tr>
+<tr><td>md:</td><td>≥768px</td></tr>
+<tr><td>lg:</td><td>≥1024px</td></tr>
+<tr><td>xl:</td><td>≥1280px</td></tr>
+<tr><td>2xl:</td><td>≥1536px</td></tr>
+</table>
+
+<div class="separator"></div>
+<b>CSS Grid responsivo puro:</b>
+<pre>/* Auto-adaptable sin media queries */
+.grid-auto {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+/* Flexbox responsivo */
+.flex-wrap-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.flex-wrap-layout > * {
+  flex: 1 1 300px; /* min 300px */
+}
+
+/* Imagenes responsivas */
+img { max-width: 100%; height: auto; }
+
+/* Tipografia fluida */
+h1 { font-size: clamp(1.5rem, 4vw, 3rem); }
+</pre>
+
+<b>Comparacion rapida:</b>
+<table class="ref">
+<tr><td><b>CSS puro</b></td><td>Maximo control, mas codigo</td></tr>
+<tr><td><b>Bootstrap</b></td><td>Rapido, componentes listos, pesado</td></tr>
+<tr><td><b>Tailwind</b></td><td>Utilidades, flexible, curva de aprendizaje</td></tr>
+</table>
+</div>
+</section>
+
+</div><!-- /columns -->
+</div><!-- /page 7 -->
+
+</body>
+</html>
